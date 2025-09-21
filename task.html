@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اضافة عناصر ديناميكية </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .controls {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 0 5px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #addElementStart {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #addElementEnd {
+      background-color: #2196F3;
+      color: white;
+    }
+
+    #clearAll {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .item {
+      padding: 15px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item button {
+      background-color: white;
+      color: #333;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>إضافة عناصر ديناميكية</h1>
+
+  <div class="controls">
+    <button id="addElementStart">إضافة في البداية</button>
+    <button id="addElementEnd">إضافة في النهاية</button>
+    <button id="clearAll">مسح الكل</button>
+  </div>
+
+  <div class="container" id="container">
+
+      </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById("container");
+
+      const colors = [
+        "#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7",
+        "#DDA0DD", "#98D8C8", "#F7DC6F", "#BB8FCE", "#85C1E9"
+      ];
+
+      
+      function createItem() {
+        const item = document.createElement("div");
+        item.className = "item";
+
+       
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        item.style.backgroundColor = randomColor;
+
+        
+        const content = document.createElement("span");
+        content.textContent = `العنصر ${container.children.length + 1}`;
+
+        
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "حذف";
+        deleteBtn.onclick = function () {
+          container.removeChild(item);
+        };
+
+        
+        item.appendChild(content);
+        item.appendChild(deleteBtn);
+
+        return item;
+      }
+
+      
+      for (let i = 0; i < 5; i++) {
+        container.appendChild(createItem());
+      }
+
+      
+      document.getElementById("addElementStart").addEventListener("click", function () {
+        const newItem = createItem();
+        if (container.firstChild) {
+          container.insertBefore(newItem, container.firstChild);
+        } else {
+          container.appendChild(newItem);
+        }
+      });
+
+      
+      document.getElementById("addElementEnd").addEventListener("click", function () {
+        const newItem = createItem();
+        container.appendChild(newItem);
+      });
+
+      
+      document.getElementById("clearAll").addEventListener("click", function () {
+        container.innerHTML = "";
+      });
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    
+</body>
+</html>
